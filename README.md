@@ -1,2 +1,161 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rekomendasi Film Horror</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
+      color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid crimson;
+    }
+    header h1 {
+      color: crimson;
+    }
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(255,0,0,0.4);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 15px;
+    }
+    .card-content h3 {
+      margin: 0 0 10px;
+      color: crimson;
+    }
+    .card-content p {
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: crimson;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: darkred;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #111;
+      border-top: 2px solid crimson;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎬 Rekomendasi Film horror By Nadhira jasmine</h1>
+    <p>Film horror terbaru dan terbaik yang wajib ditonton di bioskop!</p>
+  </header>
+
+  <main class="container" id="filmList"></main>
+
+  <footer>
+    <p>&copy; 2025 Website Rekomendasi Horror | Dibuat untuk pecinta film horor 👻</p>
+  </footer>
+
+  <script>
+    const films = [
+      {
+        title: "The Conjuring: The Devil Made Me Do It",
+        desc: "Kasus pengadilan pertama di AS yang mengklaim pembunuhan karena kerasukan iblis.",
+        img: "https://image.tmdb.org/t/p/w500/xbSuFiJbbBWCkyCCKIMfuDCA4yV.jpg",
+        trailer: "https://www.youtube.com/watch?v=h9Q4zZS2v1k"
+      },
+      {
+        title: "Insidious: The Red Door",
+        desc: "Keluarga Lambert kembali menghadapi roh jahat dari dunia lain yang ingin menguasai tubuh mereka.",
+        img: "https://image.tmdb.org/t/p/w500/d07xtqwq1uriQ1hda6qeu8Skt5m.jpg",
+        trailer: "https://www.youtube.com/watch?v=SzWrEWZiMqg"
+      },
+      {
+        title: "Annabelle Comes Home",
+        desc: "Boneka terkutuk Annabelle membangkitkan roh-roh jahat lain di ruang artefak keluarga Warren.",
+        img: "https://image.tmdb.org/t/p/w500/qWsHMrbg9DsBY3bCMk9jyYCRVRs.jpg",
+        trailer: "https://www.youtube.com/watch?v=bCxm7cTpBAs"
+      },
+      {
+        title: "Hereditary",
+        desc: "Rahasia kelam keluarga yang diwariskan dari generasi ke generasi berujung pada teror mengerikan.",
+        img: "https://image.tmdb.org/t/p/w500/lHV8HHlhwNup2VbpiACtlKzaGIQ.jpg",
+        trailer: "https://www.youtube.com/watch?v=V6wWKNij_1M"
+      },
+      {
+        title: "A Quiet Place",
+        desc: "Keluarga harus hidup dalam keheningan agar tidak diburu oleh makhluk mengerikan yang peka suara.",
+        img: "https://image.tmdb.org/t/p/w500/nAU74GmpUk7t5iklEp3bufwDq4n.jpg",
+        trailer: "https://www.youtube.com/watch?v=WR7cc5t7tv8"
+      },
+      {
+        title: "The Nun",
+        desc: "Seorang biarawati muda dan pastor menyelidiki kematian misterius di biara terpencil di Rumania.",
+        img: "https://image.tmdb.org/t/p/w500/sFC1ElvoKGdHJIWRpNB3xWJ9lJA.jpg",
+        trailer: "https://www.youtube.com/watch?v=pzD9zGcUNrw"
+      },
+      {
+        title: "Smile",
+        desc: "Seorang psikiater dihantui oleh sosok menakutkan setelah menyaksikan kematian pasiennya.",
+        img: "https://image.tmdb.org/t/p/w500/aPqcQwu4VGEewPhagWNncDbJ9Xp.jpg",
+        trailer: "https://www.youtube.com/watch?v=BcDK7lkzzsU"
+      },
+      {
+        title: "The Exorcist: Believer",
+        desc: "Dua anak perempuan kerasukan, memaksa ayah mereka mencari pertolongan supranatural.",
+        img: "https://image.tmdb.org/t/p/w500/aeUeO3wR8ZpGMDUe4T0nUgukYDy.jpg",
+        trailer: "https://www.youtube.com/watch?v=PIxpPMyGcpU"
+      }
+    ];
+
+    const filmList = document.getElementById("filmList");
+
+    films.forEach(film => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${film.img}" alt="${film.title}">
+        <div class="card-content">
+          <h3>${film.title}</h3>
+          <p>${film.desc}</p>
+          <a href="${film.trailer}" target="_blank" class="btn">▶ Tonton Trailer</a>
+        </div>
+      `;
+      filmList.appendChild(card);
+    });
+  </script>
+</body>
+</html>
 # WEB-SAYA
 Web
